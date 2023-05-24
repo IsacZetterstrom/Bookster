@@ -8,10 +8,12 @@ import React from "react";
 import fetchJson from "../utils/fetchJson";
 import { useState } from "react";
 import InputField from "./abstract/inputField";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   async function loginUser(e) {
     e.preventDefault();
@@ -27,6 +29,7 @@ function LoginForm() {
     if (response.status < 400) {
       const data = await response.json();
       sessionStorage.setItem("jwtToken", data.accessToken);
+      navigate("/library");
     } else {
       console.log(await response.text());
     }
@@ -46,6 +49,13 @@ function LoginForm() {
       />
       <button data-testid="loginBtn" type="submit">
         Login
+      </button>
+      <button
+        data-testid="guestBtn"
+        onClick={() => {
+          navigate("/library");
+        }}>
+        Proceed as guest user
       </button>
     </form>
   );
