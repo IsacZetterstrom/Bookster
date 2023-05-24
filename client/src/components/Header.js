@@ -1,3 +1,9 @@
+/**
+ * Author: Filip Blomqvist, Isac Zetterström
+ * Date: 24e May
+ * This component renders the header and login/logout button depending on if logged in or not.
+ */
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";

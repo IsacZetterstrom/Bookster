@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import BookPage from "./pages/BookPage";
 import Header from "./components/Header";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
@@ -28,6 +29,15 @@ function App() {
             <>
               <Header />
               <BookPage />
+            </>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <>
+              <Header />
+              <RegisterPage />
             </>
           }
         />

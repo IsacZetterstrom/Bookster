@@ -9,6 +9,7 @@ import fetchJson from "../utils/fetchJson";
 import { useState } from "react";
 import InputField from "./abstract/inputField";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -47,6 +48,9 @@ function LoginForm() {
         value={password}
         setValue={setPassword}
       />
+      <p>
+        No account? sign up <Link to={"/register"}>here</Link>
+      </p>
       <button data-testid="loginBtn" type="submit">
         Login
       </button>
