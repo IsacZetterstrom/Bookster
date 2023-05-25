@@ -12,7 +12,7 @@ import SearchHook from "../hooks/searchHook";
 
 function BookPage() {
   const [query, setQuery] = useState("");
-  const { isLoading, data } = SearchHook(query);
+  const { isLoading, data, setData } = SearchHook(query);
 
   return (
     <div>
@@ -22,7 +22,11 @@ function BookPage() {
         value={query}
         setValue={setQuery}
       />
-      {isLoading ? <p>Searching...</p> : <BookList data={data} />}
+      {isLoading ? (
+        <p>Searching...</p>
+      ) : (
+        <BookList data={data} setBooks={setData} />
+      )}
     </div>
   );
 }

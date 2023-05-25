@@ -7,13 +7,15 @@
 import React from "react";
 import OrderBtns from "./OrderBtns";
 
-function BookRow({ book }) {
+function BookRow({ book, setBooks }) {
   return (
     <tr>
       <td data-testid={book.title}>{book.title}</td>
       <td>{book.author}</td>
       <td>{book.quantity}</td>
-      {sessionStorage.getItem("jwtToken") !== null && <OrderBtns book={book} />}
+      {sessionStorage.getItem("jwtToken") !== null && (
+        <OrderBtns book={book} setBooks={setBooks} />
+      )}
     </tr>
   );
 }

@@ -48,5 +48,5 @@ export default function SearchHook(query) {
     return () => clearTimeout(timeOutId);
   }, [query]);
 
-  return { isLoading, data };
+  return { isLoading, data, setData };
 }

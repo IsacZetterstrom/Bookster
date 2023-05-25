@@ -1,0 +1,9 @@
+tbody{
+    tr{
+        td:last-child{
+            display: flex;
+            justify-content: space-between;
+            width: 10em;
+        }
+    }
+}

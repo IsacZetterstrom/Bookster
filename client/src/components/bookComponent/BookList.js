@@ -8,7 +8,7 @@ import React from "react";
 import BookRow from "./BookRow";
 import TableHeader from "./TableHeader";
 
-function BookList({ data }) {
+function BookList({ data, setBooks }) {
   return (
     <div>
       <table>
@@ -16,7 +16,13 @@ function BookList({ data }) {
 
         <tbody>
           {data.map((book) => {
-            return <BookRow key={`book-${book.title}`} book={book} />;
+            return (
+              <BookRow
+                key={`book-${book.title}`}
+                book={book}
+                setBooks={setBooks}
+              />
+            );
           })}
         </tbody>
       </table>

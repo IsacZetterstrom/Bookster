@@ -6,24 +6,54 @@
 
 import React, { useState } from "react";
 import CustomButton from "../abstract/CustomButton";
+import fetchJson from "../../utils/fetchJson";
 
-function OrderBtns({ book }) {
-  const [amount, setAmount] = useState(0);
+function OrderBtns({ book, setBooks }) {
+  const [quantity, setQuantity] = useState(0);
 
   function increaseClick() {
-    const newVal = amount + 1;
+    const newVal = quantity + 1;
 
     if (newVal > book.quantity) return;
 
-    setAmount(newVal);
+    setQuantity(newVal);
   }
 
   function decreaseClick() {
-    const newVal = amount - 1;
+    const newVal = quantity - 1;
 
     if (newVal < 0) return;
 
-    setAmount(newVal);
+    setQuantity(newVal);
+  }
+
+  async function submitBtn() {
+    const response = await fetchJson(
+      "http://localhost:3001/library/user/books",
+      "POST",
+      { title: book.title, quantity: quantity }
+    );
+    if (response.status < 400) {
+      const data = await response.json();
+      console.log(data);
+      setBooks((oldValue) => {
+        const newValue = JSON.parse(JSON.stringify(oldValue));
+        const currentBook = newValue.find(
+          (element) => element.title === book.title
+        );
+
+        if (currentBook) {
+          console.log("Found book!");
+          currentBook.quantity -= data.quantity;
+        }
+
+        return newValue;
+      });
+      setQuantity(0);
+    } else {
+      const data = await response.text();
+      console.log(data);
+    }
   }
 
   return (
@@ -34,7 +64,7 @@ function OrderBtns({ book }) {
         onClick={decreaseClick}
         type={"button"}
       />
-      <p data-testid={`amount-${book.title}`}>{amount}</p>
+      <p data-testid={`amount-${book.title}`}>{quantity}</p>
       <CustomButton
         testId={`inc-${book.title}`}
         name={"+"}
@@ -44,7 +74,7 @@ function OrderBtns({ book }) {
       <CustomButton
         testId={`order-${book.title}`}
         name={"Order"}
-        onClick={() => {}}
+        onClick={submitBtn}
         type={"button"}
       />
     </td>
