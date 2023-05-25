@@ -1,8 +1,15 @@
 tbody{
     tr{
+        text-align: center;
+        height: 3em;
+        border-bottom: 3px solid black;
+        td{
+            margin: 0.5em 0;
+        }
         td:last-child{
             display: flex;
             justify-content: space-between;
+            height: 100%;
             width: 10em;
         }
     }
