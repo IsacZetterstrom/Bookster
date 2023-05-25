@@ -8,11 +8,16 @@ import React from "react";
 
 function TableHeader() {
   return (
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Quantity</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Quantity</th>
+        {sessionStorage.getItem("jwtToken") !== null && (
+          <th data-testid="orderColumn">Order</th>
+        )}
+      </tr>
+    </thead>
   );
 }
 

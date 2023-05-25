@@ -12,9 +12,8 @@ function BookList({ data }) {
   return (
     <div>
       <table>
-        <thead>
-          <TableHeader />
-        </thead>
+        <TableHeader />
+
         <tbody>
           {data.map((book) => {
             return <BookRow key={`book-${book.title}`} book={book} />;
