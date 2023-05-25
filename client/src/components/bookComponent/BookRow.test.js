@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import BookRow from "./BookRow";
 
 test("does order button render", () => {
@@ -20,6 +20,8 @@ test("does order button render", () => {
   const orderBtn = screen.getByTestId("order-Harry Isacström");
 
   expect(orderBtn).toBeInTheDocument();
+  sessionStorage.clear("jwtToken");
+  cleanup();
 });
 
 test("can I change amount ordered", () => {
@@ -47,6 +49,8 @@ test("can I change amount ordered", () => {
   const bookAmount = screen.getByTestId("amount-Harry Isacström");
 
   expect(bookAmount.textContent).toBe("3");
+  sessionStorage.clear("jwtToken");
+  cleanup();
 });
 
 test("does amount not go less than 0", () => {
@@ -74,4 +78,5 @@ test("does amount not go less than 0", () => {
   const bookAmount = screen.getByTestId("amount-Harry Isacström");
 
   expect(bookAmount.textContent).toBe("0");
+  cleanup();
 });

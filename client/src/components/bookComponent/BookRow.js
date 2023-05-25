@@ -6,6 +6,8 @@
 
 import React from "react";
 import OrderBtns from "./OrderBtns";
+import isUserAdmin from "../../utils/isUserAdmin";
+import CustomButton from "../abstract/CustomButton";
 
 function BookRow({ book, setBooks }) {
   return (
@@ -15,6 +17,12 @@ function BookRow({ book, setBooks }) {
       <td>{book.quantity}</td>
       {sessionStorage.getItem("jwtToken") !== null && (
         <OrderBtns book={book} setBooks={setBooks} />
+      )}
+      {isUserAdmin() && (
+        <td>
+          <CustomButton name="Edit" onClick={() => {}} type="button" />
+          <CustomButton name="Delete" onClick={() => {}} type="button" />
+        </td>
       )}
     </tr>
   );

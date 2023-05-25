@@ -9,6 +9,8 @@ import { useState } from "react";
 import BookList from "../components/bookComponent/BookList";
 import InputField from "../components/abstract/inputField";
 import SearchHook from "../hooks/searchHook";
+import isUserAdmin from "../utils/isUserAdmin";
+import TableToggle from "../components/abstract/TableToggle";
 
 function BookPage() {
   const [query, setQuery] = useState("");
@@ -22,6 +24,7 @@ function BookPage() {
         value={query}
         setValue={setQuery}
       />
+      {isUserAdmin() && <TableToggle />}
       {isLoading ? (
         <p>Searching...</p>
       ) : (

@@ -7,6 +7,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import BookPage from "./pages/BookPage";
+import UserPage from "./pages/UserPage";
 import Header from "./components/Header";
 import RegisterPage from "./pages/RegisterPage";
 
@@ -29,6 +30,15 @@ function App() {
             <>
               <Header />
               <BookPage />
+            </>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <>
+              <Header />
+              <UserPage />
             </>
           }
         />
