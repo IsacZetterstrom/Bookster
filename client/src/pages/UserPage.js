@@ -18,7 +18,6 @@ function UserPage() {
 
     if (response.status < 400) {
       const data = await response.json();
-      console.log(data);
       setUsers(data);
       setIsLoading(false);
     } else {
@@ -28,7 +27,7 @@ function UserPage() {
 
   useEffect(() => {
     fetchUsers();
-  });
+  }, []);
 
   return (
     <div>
@@ -39,7 +38,11 @@ function UserPage() {
         setValue={setQuery}
       />
       {isUserAdmin() && <TableToggle />}
-      {isLoading ? <p>Loading...</p> : <UserTable users={users} />}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <UserTable users={users} setUsers={setUsers} />
+      )}
     </div>
   );
 }

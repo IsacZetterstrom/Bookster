@@ -1,7 +1,7 @@
 import React from "react";
-import CustomButton from "./abstract/CustomButton";
+import UserRow from "./userComponent/UserRow";
 
-function UserTable({ users }) {
+function UserTable({ users, setUsers }) {
   return (
     <table>
       <thead>
@@ -15,15 +15,7 @@ function UserTable({ users }) {
       <tbody>
         {users.map((user) => {
           return (
-            <tr>
-              <td>{user.username}</td>
-              <td>{user.role}</td>
-              <td>TJÄNA</td>
-              <td>
-                <CustomButton name="Promote" onClick={() => {}} type="button" />
-                <CustomButton name="Delete" onClick={() => {}} type="button" />
-              </td>
-            </tr>
+            <UserRow key={user.username} user={user} setUsers={setUsers} />
           );
         })}
       </tbody>
