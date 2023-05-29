@@ -4,12 +4,33 @@
  * This component renders a book which is used in BookRow.
  */
 
-import React from "react";
+import React, { useState } from "react";
 import OrderBtns from "./OrderBtns";
 import isUserAdmin from "../../utils/isUserAdmin";
 import CustomButton from "../abstract/CustomButton";
+import BookEditor from "./BookEditor";
+import fetchJson from "../../utils/fetchJson";
 
 function BookRow({ book, setBooks }) {
+  const [edit, setEdit] = useState(false);
+
+  async function onDeleteClick() {
+    const response = await fetchJson(
+      "http://localhost:3001/admin/books",
+      "DELETE",
+      {
+        Title: book.title,
+      }
+    );
+
+    if (response.status < 400) {
+      const data = await response.json();
+      setBooks(data.context.books);
+    } else {
+      console.log(await response.text());
+    }
+  }
+
   return (
     <tr>
       <td data-testid={book.title}>{book.title}</td>
@@ -20,10 +41,15 @@ function BookRow({ book, setBooks }) {
       )}
       {isUserAdmin() && (
         <td>
-          <CustomButton name="Edit" onClick={() => {}} type="button" />
-          <CustomButton name="Delete" onClick={() => {}} type="button" />
+          <CustomButton
+            name="Edit"
+            onClick={() => setEdit(true)}
+            type="button"
+          />
+          <CustomButton name="Delete" onClick={onDeleteClick} type="button" />
         </td>
       )}
+      {edit && <BookEditor book={book} setEdit={setEdit} setBooks={setBooks} />}
     </tr>
   );
 }

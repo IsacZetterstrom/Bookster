@@ -4,14 +4,18 @@ export default function InputField({
   inputType,
   value,
   testId,
+  name,
+  required,
 }) {
   return (
     <input
+      required={required}
+      name={name}
       data-testid={testId}
       type={inputType}
       placeholder={placeholder}
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => setValue && setValue(e.target.value)}
     />
   );
 }

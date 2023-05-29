@@ -6,13 +6,16 @@
 
 import { screen, render } from "@testing-library/react";
 import TableHeader from "./TableHeader";
+import { BrowserRouter } from "react-router-dom";
 
 test("Does order column render", async () => {
-  sessionStorage.setItem("jwtToken", "fakeToken");
+  window.sessionStorage.setItem("jwtToken", "fakeToken");
   render(
-    <table>
-      <TableHeader />
-    </table>
+    <BrowserRouter>
+      <table>
+        <TableHeader />
+      </table>
+    </BrowserRouter>
   );
   const orderColumn = screen.getByTestId("orderColumn");
   expect(orderColumn).toBeInTheDocument();

@@ -1,8 +1,14 @@
+/**
+ * Author: Filip Blomqvist, Isac Zetterström
+ * Date: 26e May
+ * A file with tests book info and order buttons.
+ */
+
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import BookRow from "./BookRow";
 
 test("does order button render", () => {
-  sessionStorage.setItem("jwtToken", "fakeToken");
+  window.sessionStorage.setItem("jwtToken", "fakeToken");
   render(
     <table>
       <tbody>
@@ -20,12 +26,12 @@ test("does order button render", () => {
   const orderBtn = screen.getByTestId("order-Harry Isacström");
 
   expect(orderBtn).toBeInTheDocument();
-  sessionStorage.clear("jwtToken");
+  window.sessionStorage.clear("jwtToken");
   cleanup();
 });
 
 test("can I change amount ordered", () => {
-  sessionStorage.setItem("jwtToken", "fakeToken");
+  window.sessionStorage.setItem("jwtToken", "fakeToken");
   render(
     <table>
       <tbody>
@@ -49,12 +55,12 @@ test("can I change amount ordered", () => {
   const bookAmount = screen.getByTestId("amount-Harry Isacström");
 
   expect(bookAmount.textContent).toBe("3");
-  sessionStorage.clear("jwtToken");
+  window.sessionStorage.clear("jwtToken");
   cleanup();
 });
 
 test("does amount not go less than 0", () => {
-  sessionStorage.setItem("jwtToken", "fakeToken");
+  window.sessionStorage.setItem("jwtToken", "fakeToken");
   render(
     <table>
       <tbody>

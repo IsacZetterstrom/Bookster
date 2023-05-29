@@ -25,7 +25,7 @@ function App() {
           }
         />
         <Route
-          path="/library"
+          path="/library/*"
           element={
             <>
               <Header />

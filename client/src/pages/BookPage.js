@@ -11,10 +11,14 @@ import InputField from "../components/abstract/inputField";
 import SearchHook from "../hooks/searchHook";
 import isUserAdmin from "../utils/isUserAdmin";
 import TableToggle from "../components/abstract/TableToggle";
+import { Routes, Route } from "react-router-dom";
+import BookAdd from "../components/bookComponent/BookAdd";
 
 function BookPage() {
   const [query, setQuery] = useState("");
   const { isLoading, data, setData } = SearchHook(query);
+
+  const isAdmin = isUserAdmin();
 
   return (
     <div>
@@ -24,11 +28,16 @@ function BookPage() {
         value={query}
         setValue={setQuery}
       />
-      {isUserAdmin() && <TableToggle />}
+      {isAdmin && <TableToggle />}
       {isLoading ? (
         <p>Searching...</p>
       ) : (
         <BookList data={data} setBooks={setData} />
+      )}
+      {isAdmin && (
+        <Routes>
+          <Route path="addBook" element={<BookAdd setBooks={setData} />} />
+        </Routes>
       )}
     </div>
   );

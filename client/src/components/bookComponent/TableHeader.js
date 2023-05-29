@@ -6,9 +6,15 @@
 
 import React from "react";
 import isUserAdmin from "../../utils/isUserAdmin";
+import { useNavigate } from "react-router-dom";
 
 function TableHeader() {
   const isAdmin = isUserAdmin();
+  const navigate = useNavigate();
+
+  function addNewBookClick() {
+    navigate("/library/addBook");
+  }
 
   return (
     <thead>
@@ -19,6 +25,7 @@ function TableHeader() {
           Availability
           {isAdmin && (
             <button
+              onClick={addNewBookClick}
               style={{
                 position: "absolute",
                 top: "-250%",
