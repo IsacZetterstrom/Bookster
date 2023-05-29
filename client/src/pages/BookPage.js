@@ -21,7 +21,7 @@ function BookPage() {
   const isAdmin = isUserAdmin();
 
   return (
-    <div>
+    <div className="table-page">
       <InputField
         testId="searchInput"
         placeholder="Type the title of a book"

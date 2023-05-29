@@ -1,0 +1,27 @@
+@use "../abstract/variables" as *;
+
+header{
+    background-color: $cDark-green;
+    color: $cWhite;
+    padding: 1.5em 0;
+    margin: 0 0 2.5em 0;
+    h1{
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+        text-align: center;
+        font-weight: 800;
+        transform: rotateZ(-5deg);
+    }
+    p,
+    button{
+        position: absolute;
+        font-size: 1.25rem;
+        top: 1.25em;
+        right: 2em;
+    }
+    p{
+        top: 1.4em;
+        right: 7em;
+    }
+}

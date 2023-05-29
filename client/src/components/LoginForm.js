@@ -36,31 +36,42 @@ function LoginForm() {
     }
   }
   return (
-    <form onSubmit={loginUser}>
+    <form className="user-form-container" onSubmit={loginUser}>
       <h2 data-testid="loginText">Login</h2>
-      <InputField
-        testId="usernameInput"
-        value={username}
-        setValue={setUsername}
-      />
-      <InputField
-        testId="passwordInput"
-        value={password}
-        setValue={setPassword}
-      />
-      <p>
-        No account? sign up <Link to={"/register"}>here</Link>
-      </p>
-      <button data-testid="loginBtn" type="submit">
-        Login
-      </button>
-      <button
-        data-testid="guestBtn"
-        onClick={() => {
-          navigate("/library");
-        }}>
-        Proceed as guest user
-      </button>
+      <div className="input-container">
+        <label htmlFor="username">Username</label>
+        <InputField
+          testId="usernameInput"
+          value={username}
+          id="username"
+          setValue={setUsername}
+        />
+      </div>
+      <div className="input-container">
+        <label htmlFor="password">Password</label>
+        <InputField
+          testId="passwordInput"
+          value={password}
+          id="password"
+          setValue={setPassword}
+        />
+        <p>
+          No account? sign up <Link to={"/register"}>here</Link>
+        </p>
+      </div>
+
+      <div className="btn-container">
+        <button data-testid="loginBtn" type="submit">
+          Login
+        </button>
+        <button
+          data-testid="guestBtn"
+          onClick={() => {
+            navigate("/library");
+          }}>
+          Proceed as guest user
+        </button>
+      </div>
     </form>
   );
 }

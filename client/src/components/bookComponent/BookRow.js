@@ -19,12 +19,13 @@ function BookRow({ book, setBooks }) {
       "http://localhost:3001/admin/books",
       "DELETE",
       {
-        Title: book.title,
+        title: book.title,
       }
     );
 
     if (response.status < 400) {
       const data = await response.json();
+      console.log(data);
       setBooks(data.context.books);
     } else {
       console.log(await response.text());
@@ -33,9 +34,15 @@ function BookRow({ book, setBooks }) {
 
   return (
     <tr>
-      <td data-testid={book.title}>{book.title}</td>
-      <td>{book.author}</td>
-      <td>{book.quantity}</td>
+      <td data-testid={book.title}>
+        <p>{book.title}</p>
+      </td>
+      <td>
+        <p>{book.author}</p>
+      </td>
+      <td>
+        <p>{book.quantity}</p>
+      </td>
       {sessionStorage.getItem("jwtToken") !== null && (
         <OrderBtns book={book} setBooks={setBooks} />
       )}

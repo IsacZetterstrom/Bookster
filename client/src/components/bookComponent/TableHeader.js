@@ -19,27 +19,26 @@ function TableHeader() {
   return (
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Author</th>
+        <th>
+          <p>Title</p>
+        </th>
+        <th>
+          <p>Author</p>
+        </th>
         <th style={{ position: "relative" }}>
-          Availability
-          {isAdmin && (
-            <button
-              onClick={addNewBookClick}
-              style={{
-                position: "absolute",
-                top: "-250%",
-                left: "0",
-                width: "100%",
-              }}>
-              Add new book
-            </button>
-          )}
+          <p>Availability</p>
+          {isAdmin && <button onClick={addNewBookClick}>Add new book</button>}
         </th>
         {sessionStorage.getItem("jwtToken") !== null && (
-          <th data-testid="orderColumn">Order</th>
+          <th data-testid="orderColumn">
+            <p>Order</p>
+          </th>
         )}
-        {isAdmin && <th>Action</th>}
+        {isAdmin && (
+          <th>
+            <p>Action</p>
+          </th>
+        )}
       </tr>
     </thead>
   );

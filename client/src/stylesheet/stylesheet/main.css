@@ -1,14 +1,152 @@
-tbody tr {
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+.table-page {
+  position: relative;
   text-align: center;
-  height: 3em;
-  border-bottom: 3px solid black;
+  width: 80%;
+  margin: 0 auto;
 }
-tbody tr td {
-  margin: 0.5em 0;
+.table-page input {
+  display: block;
+  margin-left: 0;
+  margin-right: auto;
+  font-size: 1.25rem;
 }
-tbody tr td:last-child {
+.table-page .table-toggle-container {
+  position: absolute;
+  right: 0;
+  top: 0em;
   display: flex;
-  justify-content: space-between;
-  height: 100%;
-  width: 10em;
+  justify-content: end;
+}
+.table-page button:hover {
+  background-color: #C3D58A;
+}
+.table-page table {
+  width: 100%;
+  margin: 0 auto;
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+.table-page table thead tr {
+  background-color: #0B194E;
+}
+.table-page table thead tr th {
+  position: relative;
+  border: 3px solid #01092A;
+  padding: 1em 0;
+}
+.table-page table thead tr th button {
+  position: absolute;
+  left: 0;
+  top: -90%;
+  width: 100%;
+}
+.table-page table thead tr th p {
+  padding: 0 1em;
+}
+.table-page table tbody tr {
+  background-color: #697398;
+}
+.table-page table tbody tr td {
+  border: 3px solid #01092A;
+  padding: 1em;
+}
+.table-page table tbody tr td p {
+  display: inline-block;
+  margin: auto;
+}
+.table-page table tbody tr td button {
+  margin: 0 0.25em;
+}
+
+.user-form-container {
+  border-radius: 1em;
+  margin: 0 auto;
+  flex-direction: column;
+  width: 33%;
+  min-width: 20em;
+  max-width: 30em;
+  background-color: #C3D58A;
+}
+.user-form-container h2 {
+  border-radius: 0.5em 0.5em 0 0;
+  text-align: center;
+  padding: 1em;
+  background-color: #0B194E;
+  color: #ffffff;
+}
+.user-form-container .input-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+.user-form-container .input-container input {
+  margin: 0 0 0.5em 0;
+  height: 1.5em;
+}
+.user-form-container .input-container label {
+  margin: 0.5em 0 0.5em 0;
+}
+.user-form-container .btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user-form-container .btn-container button {
+  height: 2em;
+  width: 80%;
+  margin: 0.5em;
+  border-radius: 0.5em;
+}
+
+.register-msg {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+header {
+  background-color: #2C3A00;
+  color: #ffffff;
+  padding: 1.5em 0;
+  margin: 0 0 2.5em 0;
+}
+header h1 {
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 800;
+  transform: rotateZ(-5deg);
+}
+header p,
+header button {
+  position: absolute;
+  font-size: 1.25rem;
+  top: 1.25em;
+  right: 2em;
+}
+header p {
+  top: 1.4em;
+  right: 7em;
+}
+
+button {
+  border: 2px solid black;
+  border-radius: 0.25em;
+  font-size: 1.25rem;
+  padding: 0 0.2em;
 }/*# sourceMappingURL=main.css.map */

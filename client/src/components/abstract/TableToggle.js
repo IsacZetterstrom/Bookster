@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 function TableToggle() {
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="table-toggle-container">
       <CustomButton
         name="Books"
         onClick={() => {

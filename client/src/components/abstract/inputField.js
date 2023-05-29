@@ -6,6 +6,7 @@ export default function InputField({
   testId,
   name,
   required,
+  id,
 }) {
   return (
     <input
@@ -15,6 +16,7 @@ export default function InputField({
       type={inputType}
       placeholder={placeholder}
       value={value}
+      id={id}
       onChange={(e) => setValue && setValue(e.target.value)}
     />
   );

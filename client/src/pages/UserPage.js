@@ -30,7 +30,7 @@ function UserPage() {
   }, []);
 
   return (
-    <div>
+    <div className="table-page">
       <InputField
         testId="searchInput"
         placeholder="Search by username..."

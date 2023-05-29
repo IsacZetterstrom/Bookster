@@ -17,11 +17,12 @@ const getBook = (title) => {
 };
 
 const searchBooks = (query) => {
+  const ctx = getBookContext();
   query = query.toLowerCase();
-  console.log(query);
-  return getBookContext().books.filter((book) => {
+  const results = getBookContext().books.filter((book) => {
     return (book.title + " " + book.author).toLowerCase().includes(query);
   });
+  return { books: results, version: ctx.version };
 };
 
 const getBooks = () => {

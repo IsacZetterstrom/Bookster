@@ -1,0 +1,51 @@
+@use "../abstract/variables" as *;
+.user-form-container{
+    border-radius: 1em;
+    margin: 0 auto;
+    flex-direction: column;
+    width: 33%;
+    min-width: 20em;
+    max-width: 30em;
+    background-color: $cLight-green;
+    h2{
+        border-radius: .5em .5em 0 0 ;
+        text-align: center;
+        padding: 1em;
+        background-color: $cNavy-blue;
+        color: $cWhite;
+    }
+    .input-container{
+        
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 0 auto;
+        
+        input{
+            margin: 0 0 0.5em 0;
+            height: 1.5em;
+        }
+        label{
+            margin: 0.5em 0 0.5em 0;
+        }
+
+    }
+    .btn-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        button{
+            height: 2em;
+            width: 80%;
+            margin: .5em;
+            border-radius: .5em;
+        }
+    }
+
+}
+.register-msg{
+    text-align: center;
+    font-size: 1.2em;
+}

@@ -39,24 +39,40 @@ function RegisterForm() {
 
   return (
     <>
-      <form>
+      <form className="user-form-container">
         <h2>Register</h2>
-        <InputField inputType="text" value={username} setValue={setUsername} />
-        <InputField
-          inputType="password"
-          value={password}
-          setValue={setPassword}
-        />
-        <p>
-          Already have an account? Sign in <Link to={"/"}>here</Link>
-        </p>
-        <CustomButton
-          name="Register new account"
-          type="submit"
-          onClick={registerUser}
-        />
+        <div className="input-container">
+          <label htmlFor="username">Username</label>
+          <InputField
+            inputType="text"
+            id="username"
+            value={username}
+            setValue={setUsername}
+          />
+        </div>
+        <div className="input-container">
+          {" "}
+          <label htmlFor="password">Password</label>
+          <InputField
+            inputType="password"
+            value={password}
+            id="password"
+            setValue={setPassword}
+          />
+          <p>
+            Already have an account? Sign in <Link to={"/"}>here</Link>
+          </p>
+        </div>
+
+        <div className="btn-container">
+          <CustomButton
+            name="Register new account"
+            type="submit"
+            onClick={registerUser}
+          />
+        </div>
       </form>
-      {serverMessage}
+      <aside className="register-msg">{serverMessage}</aside>
     </>
   );
 }

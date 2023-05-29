@@ -10,12 +10,16 @@ function isUserAdmin() {
   if (!token) return false;
 
   try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
+    const payload = getJwtPayload(token);
 
     return payload.role === "ADMIN";
   } catch (error) {
     return false;
   }
+}
+
+export function getJwtPayload(token) {
+  return JSON.parse(atob(token.split(".")[1]));
 }
 
 export default isUserAdmin;

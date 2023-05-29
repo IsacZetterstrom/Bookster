@@ -9,10 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import jwtCheck from "../utils/jwtCheck";
 import CustomButton from "./abstract/CustomButton";
+import { getJwtPayload } from "../utils/isUserAdmin";
 
 function Header() {
   const [showBtns, setShowBtns] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userText, setUserText] = useState("Guest");
   const navigate = useNavigate();
 
   function onSignOut() {
@@ -20,9 +22,23 @@ function Header() {
     navigate("/");
   }
 
+  function fetchUserText() {
+    const token = sessionStorage.getItem("jwtToken");
+
+    if (token === null) {
+      setUserText("Guest");
+      return;
+    }
+
+    const jwtPayload = getJwtPayload(token);
+
+    setUserText(`${jwtPayload.role.toLowerCase()} ${jwtPayload.username}`);
+  }
+
   useEffect(() => {
     setShowBtns(window.location.pathname === "/library");
     setLoggedIn(jwtCheck());
+    fetchUserText();
   });
 
   return (
@@ -40,6 +56,10 @@ function Header() {
             }}
           />
         ))}
+      {window.location.pathname !== "/" &&
+        window.location.pathname !== "/register" && (
+          <p>Browsing as {userText}</p>
+        )}
     </header>
   );
 }

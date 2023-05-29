@@ -38,7 +38,7 @@ export default function SearchHook(query) {
 
       const jsonData = await response.json();
 
-      setData(jsonData);
+      setData(jsonData.books);
       setIsLoading(false);
     }
 

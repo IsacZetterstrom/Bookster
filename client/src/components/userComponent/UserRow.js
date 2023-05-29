@@ -47,6 +47,7 @@ function UserRow({ user, setUsers }) {
       <td>
         <CustomButton
           name="Promote"
+          disabled={user.role === "ADMIN"}
           onClick={() => onPromoteClick(user.username)}
           type="button"
         />
