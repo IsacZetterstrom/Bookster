@@ -15,10 +15,10 @@ function BookList({ data, setBooks }) {
         <TableHeader />
 
         <tbody>
-          {data.map((book) => {
+          {data.map((book, index) => {
             return (
               <BookRow
-                key={`book-${book.title}`}
+                key={`book-${book.title}-${index}`}
                 book={book}
                 setBooks={setBooks}
               />

@@ -18,8 +18,6 @@ function BookAdd({ setBooks }) {
     const formData = new FormData(e.target);
     const values = Object.fromEntries(formData);
 
-    console.log(values);
-
     const response = await fetchJson(
       "http://localhost:3001/admin/books",
       "POST",
@@ -38,13 +36,24 @@ function BookAdd({ setBooks }) {
     <div>
       <form onSubmit={onSubmit}>
         <label>Title</label>
-        <InputField required={true} name="title" />
+        <InputField testId="title-input" required={true} name="title" />
         <label>Author</label>
-        <InputField required={true} name="author" />
+        <InputField testId="author-input" required={true} name="author" />
         <label>Quantity</label>
-        <InputField required={true} name="quantity" inputType="number" />
-        <CustomButton name="Save changes" type="submit" />
+        <InputField
+          testId="quantity-input"
+          required={true}
+          name="quantity"
+          inputType="number"
+        />
         <CustomButton
+          testId="save-input"
+          onClick={() => {}}
+          name="Save changes"
+          type="submit"
+        />
+        <CustomButton
+          testId="discardBtn"
           name="Discard changes"
           onClick={() => {
             navigate("/library");
