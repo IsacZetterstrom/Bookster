@@ -10,7 +10,6 @@ import BookList from "../components/bookComponent/BookList";
 import InputField from "../components/abstract/inputField";
 import SearchHook from "../hooks/searchHook";
 import isUserAdmin from "../utils/isUserAdmin";
-import TableToggle from "../components/abstract/TableToggle";
 import { Routes, Route } from "react-router-dom";
 import BookAdd from "../components/bookComponent/BookAdd";
 
@@ -28,7 +27,6 @@ function BookPage() {
         value={query}
         setValue={setQuery}
       />
-      {isAdmin && <TableToggle />}
       {isLoading ? (
         <p>Searching...</p>
       ) : (

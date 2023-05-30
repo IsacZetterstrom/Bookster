@@ -11,7 +11,6 @@ h3 {
 }
 
 .table-page {
-  position: relative;
   text-align: center;
   width: 80%;
   margin: 0 auto;
@@ -22,12 +21,13 @@ h3 {
   margin-right: auto;
   font-size: 1.25rem;
 }
-.table-page .table-toggle-container {
+.table-page .toggle-container {
+  position: relative;
+}
+.table-page .toggle-container .table-toggle-container {
   position: absolute;
+  top: -55%;
   right: 0;
-  top: 0em;
-  display: flex;
-  justify-content: end;
 }
 .table-page button:hover {
   background-color: #C3D58A;
@@ -46,10 +46,10 @@ h3 {
   border: 3px solid #01092A;
   padding: 1em 0;
 }
-.table-page table thead tr th button {
+.table-page table thead tr th .add-book-btn {
   position: absolute;
   left: 0;
-  top: -90%;
+  top: -55%;
   width: 100%;
 }
 .table-page table thead tr th p {
@@ -111,13 +111,34 @@ h3 {
   margin: 0.5em;
   border-radius: 0.5em;
 }
+.user-form-container .error-msg {
+  color: red;
+  font-weight: 800;
+  text-align: center;
+  padding-bottom: 0.5em;
+}
 
 .register-msg {
+  color: black;
   text-align: center;
   font-size: 1.2em;
+  padding-bottom: 0.5em;
+}
+
+.table-page {
+  position: relative;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+.table-page .table-toggle-container {
+  position: absolute;
+  right: 0%;
+  top: 0;
 }
 
 header {
+  position: relative;
   background-color: #2C3A00;
   color: #ffffff;
   padding: 1.5em 0;
@@ -142,6 +163,48 @@ header button {
 header p {
   top: 1.4em;
   right: 7em;
+}
+
+.book-form-background {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 15;
+}
+.book-form-background form {
+  background-image: linear-gradient(to bottom, #01092A 0%, #01092A 15.5%, #C3D58A 15.6%, #C3D58A 100%);
+  color: #0B194E;
+  width: 50%;
+  margin: 4em auto;
+  padding: 2em;
+  font-size: 1.25rem;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  align-items: center;
+}
+.book-form-background form h3 {
+  color: #ffffff;
+  margin-bottom: 0.5em;
+}
+.book-form-background form label {
+  font-weight: 800;
+}
+.book-form-background form input {
+  margin: 0 auto;
+  border-radius: 0.25em;
+  padding: 0.25em;
+}
+.book-form-background form button {
+  width: 5em;
+}
+
+body {
+  min-width: 90em;
 }
 
 button {

@@ -14,9 +14,11 @@ import { Link } from "react-router-dom";
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [serverMessage, setServerMessage] = useState("");
   const navigate = useNavigate();
 
   async function loginUser(e) {
+    setServerMessage("");
     e.preventDefault();
     const response = await fetchJson(
       "http://localhost:3001/auth/login",
@@ -32,7 +34,9 @@ function LoginForm() {
       sessionStorage.setItem("jwtToken", data.accessToken);
       navigate("/library");
     } else {
-      console.log(await response.text());
+      const data = await response.json();
+
+      setServerMessage(data.error);
     }
   }
   return (
@@ -50,6 +54,7 @@ function LoginForm() {
       <div className="input-container">
         <label htmlFor="password">Password</label>
         <InputField
+          inputType="password"
           testId="passwordInput"
           value={password}
           id="password"
@@ -72,6 +77,7 @@ function LoginForm() {
           Proceed as guest user
         </button>
       </div>
+      <aside className="error-msg">{serverMessage}</aside>
     </form>
   );
 }

@@ -35,8 +35,12 @@ function BookEditor({ book, setBooks, setEdit }) {
     }
   }
 
+  function onBackgroundClick(e) {
+    if (e.target.className === "book-form-background") setEdit(false);
+  }
+
   return (
-    <td style={{ position: "absolute" }}>
+    <td className="book-form-background" onClick={onBackgroundClick}>
       <form onSubmit={onSubmit} style={{ backgroundColor: "white" }}>
         <h3>Edit</h3>
         <label>Title - {book.title}</label>

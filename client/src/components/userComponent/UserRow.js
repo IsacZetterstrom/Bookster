@@ -1,3 +1,9 @@
+/**
+ * Author: Filip Blomqvist, Isac Zetterström
+ * Date: 30e May
+ * This component renders details of a registered user
+ */
+
 import React from "react";
 import CustomButton from "../abstract/CustomButton";
 import fetchJson from "../../utils/fetchJson";

@@ -7,6 +7,7 @@
 import React from "react";
 import isUserAdmin from "../../utils/isUserAdmin";
 import { useNavigate } from "react-router-dom";
+import TableToggle from "../abstract/TableToggle";
 
 function TableHeader() {
   const isAdmin = isUserAdmin();
@@ -27,7 +28,11 @@ function TableHeader() {
         </th>
         <th style={{ position: "relative" }}>
           <p>Availability</p>
-          {isAdmin && <button onClick={addNewBookClick}>Add new book</button>}
+          {isAdmin && (
+            <button className="add-book-btn" onClick={addNewBookClick}>
+              Add new book
+            </button>
+          )}
         </th>
         {sessionStorage.getItem("jwtToken") !== null && (
           <th data-testid="orderColumn">
@@ -35,7 +40,8 @@ function TableHeader() {
           </th>
         )}
         {isAdmin && (
-          <th>
+          <th className="toggle-container">
+            {isAdmin && <TableToggle />}
             <p>Action</p>
           </th>
         )}

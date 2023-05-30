@@ -33,8 +33,13 @@ function BookAdd({ setBooks }) {
   }
 
   return (
-    <div>
+    <div
+      className="book-form-background"
+      onClick={(e) =>
+        e.target.className === "book-form-background" && navigate("/library")
+      }>
       <form onSubmit={onSubmit}>
+        <h3>Add new book</h3>
         <label>Title</label>
         <InputField testId="title-input" required={true} name="title" />
         <label>Author</label>

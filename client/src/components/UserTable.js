@@ -1,3 +1,9 @@
+/**
+ * Author: Filip Blomqvist, Isac Zetterström
+ * Date: 30e May
+ * This component renders a list of registered users and their information.
+ */
+
 import React from "react";
 import UserRow from "./userComponent/UserRow";
 

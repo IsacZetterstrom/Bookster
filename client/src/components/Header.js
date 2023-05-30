@@ -36,7 +36,10 @@ function Header() {
   }
 
   useEffect(() => {
-    setShowBtns(window.location.pathname === "/library");
+    setShowBtns(
+      window.location.pathname === "/library" ||
+        window.location.pathname === "/users"
+    );
     setLoggedIn(jwtCheck());
     fetchUserText();
   });

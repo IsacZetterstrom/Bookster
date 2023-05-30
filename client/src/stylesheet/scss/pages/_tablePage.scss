@@ -1,7 +1,6 @@
 @use "../abstract/variables" as *;
 
 .table-page{
-    position: relative;
     text-align: center;
     width: 80%;
     margin: 0 auto;
@@ -11,13 +10,17 @@
         margin-right: auto;
         font-size: 1.25rem;
     }
-    .table-toggle-container{
-        position: absolute;
-        right: 0;
-        top: 0em;
-        display: flex;
-        justify-content: end;
+    .toggle-container{
+        position: relative;
+
+        
+        .table-toggle-container{
+            position: absolute;
+            top: -55%;
+            right: 0;
+        }
     }
+
     button:hover{
         background-color: $cLight-green;
     }
@@ -33,10 +36,10 @@
                     position: relative;
                     border: 3px solid $cDark-blue;
                     padding: 1em 0;
-                    button{
+                    .add-book-btn{
                         position: absolute;
                         left: 0;
-                        top: -90%;
+                        top: -55%;
                         width: 100%;
                     }
                     p{

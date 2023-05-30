@@ -1,0 +1,39 @@
+@use "../abstract/variables" as *;
+
+.book-form-background{
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 15;
+    form{
+        background-image: linear-gradient(to bottom, $cDark-blue 0%, $cDark-blue 15.5%, $cLight-green 15.6%, $cLight-green 100% );
+        color: $cNavy-blue;
+        width: 50%;
+        margin: 4em auto;
+        padding: 2em;
+        font-size: 1.25rem;
+        border-radius: 0.5em;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+        align-items: center;
+        h3{
+            color: $cWhite;
+            margin-bottom: 0.5em;
+        }
+        label{
+            font-weight: 800;
+        }
+        input{
+            margin: 0 auto;
+            border-radius: 0.25em;
+            padding: 0.25em;
+        }
+        button{
+            width: 5em;
+        }
+    }
+}

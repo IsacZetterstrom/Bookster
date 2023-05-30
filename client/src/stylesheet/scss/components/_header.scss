@@ -1,6 +1,7 @@
 @use "../abstract/variables" as *;
 
 header{
+    position: relative;
     background-color: $cDark-green;
     color: $cWhite;
     padding: 1.5em 0;

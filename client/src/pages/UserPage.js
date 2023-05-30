@@ -1,3 +1,9 @@
+/**
+ * Author: Filip Blomqvist, Isac Zetterström
+ * Date: 30e May
+ * This component renders the user page
+ */
+
 import React, { useState, useEffect } from "react";
 import InputField from "../components/abstract/inputField";
 import isUserAdmin from "../utils/isUserAdmin";

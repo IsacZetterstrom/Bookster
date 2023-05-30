@@ -15,9 +15,11 @@ function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [serverMessage, setServerMessage] = useState("");
+  const [msgClass, setMsgClass] = useState("");
   const navigate = useNavigate();
 
   async function registerUser(e) {
+    setServerMessage("");
     e.preventDefault();
 
     const response = await fetchJson(
@@ -29,10 +31,12 @@ function RegisterForm() {
       const data = await response.json();
 
       setServerMessage(data.message);
+      setMsgClass("register-msg");
       setTimeout(() => {
         navigate("/");
       }, 2000);
     } else {
+      setMsgClass("register-msg error-msg");
       setServerMessage("Account already exist!");
     }
   }
@@ -71,8 +75,8 @@ function RegisterForm() {
             onClick={registerUser}
           />
         </div>
+        <aside className={msgClass}>{serverMessage}</aside>
       </form>
-      <aside className="register-msg">{serverMessage}</aside>
     </>
   );
 }
