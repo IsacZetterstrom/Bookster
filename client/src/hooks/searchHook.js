@@ -1,7 +1,7 @@
 /**
  * Author: Filip Blomqvist, Isac Zetterström
  * Date: 24e May
- * A custom hook which is used to fetch data from the database, including a searchfunction.
+ * A custom hook which is used to fetch data from the database including polling, and a searchfunction.
  */
 
 import { useState, useEffect, useRef } from "react";
@@ -71,6 +71,11 @@ export default function SearchHook(query) {
 
   useEffect(() => {
     async function pollingRoutine() {
+      if (window.location.pathname !== "/library") {
+        pollingInfo.currentTime = pollingInfo.startTime;
+        return;
+      }
+      console.log("Poll routine");
       const response = await fetchJson(
         "http://localhost:3001/library/books",
         "GET"
