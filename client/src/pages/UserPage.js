@@ -15,19 +15,24 @@ function UserPage() {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState(undefined);
 
   async function fetchUsers() {
-    const response = await fetchJson(
-      "http://localhost:3001/admin/users",
-      "GET"
-    );
+    try {
+      const response = await fetchJson(
+        "http://localhost:3001/admin/users",
+        "GET"
+      );
 
-    if (response.status < 400) {
-      const data = await response.json();
-      setUsers(data);
-      setIsLoading(false);
-    } else {
-      console.log(await response.text());
+      if (response.status < 400) {
+        const data = await response.json();
+        setUsers(data);
+        setIsLoading(false);
+      } else {
+        setError(await response.text());
+      }
+    } catch (newError) {
+      setError("Service down, try again later");
     }
   }
 
@@ -43,11 +48,12 @@ function UserPage() {
         value={query}
         setValue={setQuery}
       />
+      {error && <p>{error}</p>}
       {isUserAdmin() && <TableToggle />}
-      {isLoading ? (
+      {!error && isLoading ? (
         <p>Loading...</p>
       ) : (
-        <UserTable users={users} setUsers={setUsers} />
+        !error && <UserTable users={users} setUsers={setUsers} />
       )}
     </div>
   );

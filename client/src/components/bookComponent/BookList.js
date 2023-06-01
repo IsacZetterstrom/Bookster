@@ -8,7 +8,7 @@ import React from "react";
 import BookRow from "./BookRow";
 import TableHeader from "./TableHeader";
 
-function BookList({ data, setBooks }) {
+function BookList({ data, setBooks, error }) {
   return (
     <div>
       <table>

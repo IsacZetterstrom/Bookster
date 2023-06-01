@@ -10,6 +10,7 @@ import fetchJson from "../../utils/fetchJson";
 
 function OrderBtns({ book, setBooks }) {
   const [quantity, setQuantity] = useState(0);
+  const [error, setError] = useState(undefined);
 
   function increaseClick() {
     const newVal = quantity + 1;
@@ -28,31 +29,35 @@ function OrderBtns({ book, setBooks }) {
   }
 
   async function submitBtn() {
-    const response = await fetchJson(
-      "http://localhost:3001/library/user/books",
-      "POST",
-      { title: book.title, quantity: quantity }
-    );
-    if (response.status < 400) {
-      const data = await response.json();
-      console.log(data);
-      setBooks((oldValue) => {
-        const newValue = JSON.parse(JSON.stringify(oldValue));
-        const currentBook = newValue.find(
-          (element) => element.title === book.title
-        );
+    setError(undefined);
+    try {
+      const response = await fetchJson(
+        "http://localhost:3001/library/user/books",
+        "POST",
+        { title: book.title, quantity: quantity }
+      );
+      if (response.status < 400) {
+        const data = await response.json();
+        console.log(data);
+        setBooks((oldValue) => {
+          const newValue = JSON.parse(JSON.stringify(oldValue));
+          const currentBook = newValue.find(
+            (element) => element.title === book.title
+          );
 
-        if (currentBook) {
-          console.log("Found book!");
-          currentBook.quantity -= data.quantity;
-        }
+          if (currentBook) {
+            console.log("Found book!");
+            currentBook.quantity -= data.quantity;
+          }
 
-        return newValue;
-      });
-      setQuantity(0);
-    } else {
-      const data = await response.text();
-      console.log(data);
+          return newValue;
+        });
+        setQuantity(0);
+      } else {
+        setError(await response.text());
+      }
+    } catch (error) {
+      setError("Service down, try again later");
     }
   }
 
@@ -77,6 +82,7 @@ function OrderBtns({ book, setBooks }) {
         onClick={submitBtn}
         type={"button"}
       />
+      {error && <p>{error}</p>}
     </td>
   );
 }

@@ -15,7 +15,7 @@ import BookAdd from "../components/bookComponent/BookAdd";
 
 function BookPage() {
   const [query, setQuery] = useState("");
-  const { isLoading, data, setData } = SearchHook(query);
+  const { isLoading, data, setData, error } = SearchHook(query);
 
   const isAdmin = isUserAdmin();
 
@@ -27,10 +27,11 @@ function BookPage() {
         value={query}
         setValue={setQuery}
       />
-      {isLoading ? (
+      {error && <p>{error}</p>}
+      {error === undefined && isLoading ? (
         <p>Searching...</p>
       ) : (
-        <BookList data={data} setBooks={setData} />
+        error === undefined && <BookList data={data} setBooks={setData} />
       )}
       {isAdmin && (
         <Routes>

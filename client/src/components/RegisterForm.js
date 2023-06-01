@@ -21,23 +21,27 @@ function RegisterForm() {
   async function registerUser(e) {
     setServerMessage("");
     e.preventDefault();
+    try {
+      const response = await fetchJson(
+        "http://localhost:3001/auth/register",
+        "POST",
+        { username, password }
+      );
+      if (response.status < 400) {
+        const data = await response.json();
 
-    const response = await fetchJson(
-      "http://localhost:3001/auth/register",
-      "POST",
-      { username, password }
-    );
-    if (response.status < 400) {
-      const data = await response.json();
-
-      setServerMessage(data.message);
-      setMsgClass("register-msg");
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    } else {
+        setServerMessage(data.message);
+        setMsgClass("register-msg");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      } else {
+        setMsgClass("register-msg error-msg");
+        setServerMessage("Account already exist!");
+      }
+    } catch (error) {
       setMsgClass("register-msg error-msg");
-      setServerMessage("Account already exist!");
+      setServerMessage("Service down, try again later");
     }
   }
 
@@ -55,7 +59,6 @@ function RegisterForm() {
           />
         </div>
         <div className="input-container">
-          {" "}
           <label htmlFor="password">Password</label>
           <InputField
             inputType="password"

@@ -13,21 +13,27 @@ import fetchJson from "../../utils/fetchJson";
 
 function BookRow({ book, setBooks }) {
   const [edit, setEdit] = useState(false);
+  const [error, setError] = useState(undefined);
 
   async function onDeleteClick() {
-    const response = await fetchJson(
-      "http://localhost:3001/admin/books",
-      "DELETE",
-      {
-        title: book.title,
-      }
-    );
+    setError(undefined);
+    try {
+      const response = await fetchJson(
+        "http://localhost:3001/admin/books",
+        "DELETE",
+        {
+          title: book.title,
+        }
+      );
 
-    if (response.status < 400) {
-      const data = await response.json();
-      setBooks(data.context.ctx.books);
-    } else {
-      console.log(await response.text());
+      if (response.status < 400) {
+        const data = await response.json();
+        setBooks(data.context.ctx.books);
+      } else {
+        setError(await response.text());
+      }
+    } catch (errors) {
+      console.log(errors);
     }
   }
 
@@ -53,6 +59,7 @@ function BookRow({ book, setBooks }) {
             type="button"
           />
           <CustomButton name="Delete" onClick={onDeleteClick} type="button" />
+          {error && <p>{error}</p>}
         </td>
       )}
       {edit && <BookEditor book={book} setEdit={setEdit} setBooks={setBooks} />}

@@ -25,39 +25,53 @@ const pollingInfo = {
 export default function SearchHook(query) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [error, setError] = useState(undefined);
   const ref = useRef(false);
 
   useEffect(() => {
     pollingInfo.isSearching = query !== "";
 
     async function fetchBooksByQuery() {
-      const response = await fetchJson(
-        `http://localhost:3001/library/books/search/${query}`,
-        "GET"
-      );
+      try {
+        const response = await fetchJson(
+          `http://localhost:3001/library/books/search/${query}`,
+          "GET"
+        );
 
-      const jsonData = await response.json();
+        if (response.status < 400) {
+          const jsonData = await response.json();
 
-      setData(jsonData.books);
-      setIsLoading(false);
+          setData(jsonData.books);
+          setIsLoading(false);
+        } else {
+          setError(await response.text());
+        }
+      } catch (error) {
+        console.log(error);
+        setError("Service down, try again later");
+      }
     }
-
     async function getBooks() {
-      const response = await fetchJson(
-        "http://localhost:3001/library/books",
-        "GET"
-      );
+      try {
+        const response = await fetchJson(
+          "http://localhost:3001/library/books",
+          "GET"
+        );
 
-      if (response.status < 400) {
-        const jsonData = await response.json();
+        if (response.status < 400) {
+          const jsonData = await response.json();
 
-        pollingInfo.version = jsonData.version;
+          pollingInfo.version = jsonData.version;
 
-        setData(jsonData.books);
+          setData(jsonData.books);
 
-        setIsLoading(false);
-      } else {
-        console.log(await response.text());
+          setIsLoading(false);
+        } else {
+          setError(await response.text());
+        }
+      } catch (error) {
+        console.log(error);
+        setError("Service down, try again later");
       }
     }
 
@@ -76,19 +90,24 @@ export default function SearchHook(query) {
         return;
       }
       console.log("Poll routine");
-      const response = await fetchJson(
-        "http://localhost:3001/library/books",
-        "GET"
-      );
+      try {
+        const response = await fetchJson(
+          "http://localhost:3001/library/books",
+          "GET"
+        );
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.version !== pollingInfo.version) {
-        pollingInfo.version = data.version;
-        !pollingInfo.isSearching && setData(data.books);
-        pollingInfo.currentTime = pollingInfo.startTime;
-      } else {
-        pollingInfo.increaseTime();
+        if (data.version !== pollingInfo.version) {
+          pollingInfo.version = data.version;
+          !pollingInfo.isSearching && setData(data.books);
+          pollingInfo.currentTime = pollingInfo.startTime;
+        } else {
+          pollingInfo.increaseTime();
+        }
+      } catch (error) {
+        console.log(error);
+        setError("Service down, try again later");
       }
 
       setTimeout(pollingRoutine, pollingInfo.currentTime);
@@ -99,5 +118,5 @@ export default function SearchHook(query) {
     }
   }, []);
 
-  return { isLoading, data, setData };
+  return { isLoading, data, setData, error };
 }

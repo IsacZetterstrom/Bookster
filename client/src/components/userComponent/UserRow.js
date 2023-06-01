@@ -4,40 +4,52 @@
  * This component renders details of a registered user
  */
 
-import React from "react";
+import React, { useState } from "react";
 import CustomButton from "../abstract/CustomButton";
 import fetchJson from "../../utils/fetchJson";
 
 function UserRow({ user, setUsers }) {
-  async function onPromoteClick(username) {
-    const response = await fetchJson(
-      "http://localhost:3001/admin/users",
-      "PUT",
-      { username: username }
-    );
+  const [error, setError] = useState(undefined);
 
-    if (response.status < 400) {
-      const data = await response.json();
-      setUsers(data.context.users);
-    } else {
-      console.log(await response.text());
+  async function onPromoteClick(username) {
+    setError(undefined);
+    try {
+      const response = await fetchJson(
+        "http://localhost:3001/admin/users",
+        "PUT",
+        { username: username }
+      );
+
+      if (response.status < 400) {
+        const data = await response.json();
+        setUsers(data.context.users);
+      } else {
+        setError(await response.text());
+      }
+    } catch (error) {
+      setError("Service down, try again later");
     }
   }
 
   async function onDeleteClick(username) {
-    const response = await fetchJson(
-      "http://localhost:3001/admin/users",
-      "DELETE",
-      { username }
-    );
+    setError(undefined);
+    try {
+      const response = await fetchJson(
+        "http://localhost:3001/admin/users",
+        "DELETE",
+        { username }
+      );
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.status < 400) {
-      console.log(data);
-      setUsers(data.context.users);
-    } else {
-      console.log(data);
+      if (response.status < 400) {
+        console.log(data);
+        setUsers(data.context.users);
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      setError("Service down, try again later");
     }
   }
 
@@ -62,6 +74,7 @@ function UserRow({ user, setUsers }) {
           onClick={() => onDeleteClick(user.username)}
           type="button"
         />
+        {error && <p>{error}</p>}
       </td>
     </tr>
   );

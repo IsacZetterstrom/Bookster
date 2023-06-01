@@ -20,23 +20,27 @@ function LoginForm() {
   async function loginUser(e) {
     setServerMessage("");
     e.preventDefault();
-    const response = await fetchJson(
-      "http://localhost:3001/auth/login",
-      "POST",
-      {
-        username,
-        password,
+    try {
+      const response = await fetchJson(
+        "http://localhost:3001/auth/login",
+        "POST",
+        {
+          username,
+          password,
+        }
+      );
+
+      if (response.status < 400) {
+        const data = await response.json();
+        sessionStorage.setItem("jwtToken", data.accessToken);
+        navigate("/library");
+      } else {
+        const data = await response.json();
+
+        setServerMessage(data.error);
       }
-    );
-
-    if (response.status < 400) {
-      const data = await response.json();
-      sessionStorage.setItem("jwtToken", data.accessToken);
-      navigate("/library");
-    } else {
-      const data = await response.json();
-
-      setServerMessage(data.error);
+    } catch (error) {
+      setServerMessage("Service down, try again later");
     }
   }
   return (
