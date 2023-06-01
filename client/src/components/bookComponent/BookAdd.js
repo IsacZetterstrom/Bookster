@@ -11,9 +11,11 @@ import InputField from "../abstract/inputField";
 import { useNavigate } from "react-router-dom";
 function BookAdd({ setBooks }) {
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [serverMessage, setServerMessage] = useState(undefined);
   const navigate = useNavigate();
 
   async function onSubmit(e) {
+    setServerMessage(undefined);
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -27,8 +29,9 @@ function BookAdd({ setBooks }) {
       if (response.status < 400) {
         const data = await response.json();
         setBooks(data.context.books);
+        setServerMessage("The book was added!");
       } else {
-        console.log(await response.text());
+        setServerMessage(await response.text());
       }
     } catch (error) {
       console.log("error");
@@ -72,6 +75,9 @@ function BookAdd({ setBooks }) {
               }}
               type="button"
             />
+            {serverMessage && (
+              <p data-testid="book-add-server-message">{serverMessage}</p>
+            )}
           </>
         )}
       </form>

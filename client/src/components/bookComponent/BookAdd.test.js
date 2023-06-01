@@ -47,6 +47,10 @@ test("can admin add book", async () => {
   await fakeTimer(1000);
 
   const foundBook = books.find((element) => element.title === "Isacström");
+  const serverMessage = screen.getByTestId(
+    "book-add-server-message"
+  ).textContent;
 
   expect(foundBook).toBeDefined();
+  expect(serverMessage).toBe("The book was added!");
 });
